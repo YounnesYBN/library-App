@@ -111,7 +111,7 @@ export default class DeleteBook extends Component{
         
     }
 
-    DeleteStudent(index,id,fullName){
+    DeleteBooks(index,id,fullName){
             this.setState({
                 deletedName : null,
                 DeleteSnakBar : false,
@@ -177,7 +177,7 @@ export default class DeleteBook extends Component{
                                                     <ListItemText primary={<Typography sx={{color:"f8f4e3",textShadow:"0.5px 0.5px 3px black"}} variant="h4" color="initial">{full_title_writer.toUpperCase()}</Typography>} secondary={ <div><DateRangeIcon fontSize="small"/> : <em>{date}</em> </div> } />
                                         
                                                     <IconButton onClick={()=>{
-                                                            this.DeleteStudent(index,id,full_title_writer)
+                                                            this.DeleteBooks(index,id,full_title_writer)
                                                         }} >
                                                         {obj.loading==true?<CircularProgress  />:<DeleteForeverIcon  fontSize="large" color="error" />}
                                                     </IconButton>

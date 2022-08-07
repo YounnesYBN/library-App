@@ -71,9 +71,9 @@ class Book{
                 return $errors;
         }
         //just update depending on the id of object
-        public function  UpdateBook($database,$newId,$newTitre,$newAuteur,$newDate){
-                $query= $database->prepare("UPDATE livre SET id=?,Titre=?,auteur=?,date=? WHERE id=?");
-                $query->execute(array($newId,$newTitre,$newAuteur,$newDate,$this->id));
+        public function  UpdateBook($database){
+                $query= $database->prepare("UPDATE livre SET Titre=?,auteur=?,date=? WHERE id=?");
+                $query->execute(array($this->titre,$this->auteur,$this->date,$this->id));
                 $query->closeCursor();
                 
         }

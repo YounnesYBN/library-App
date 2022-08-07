@@ -77,6 +77,12 @@ class Emprunt{
                 $qeury->execute([$this->name,$this->Fname,$oldName,$oldFname]);
                 $qeury->closeCursor();
         }
+        public function updateEmpruntByBook($database,$oldWriter,$oldTitle){
+
+                $qeury = $database->prepare("UPDATE emprunts SET writer=?,title=? WHERE writer=? and title=?");
+                $qeury->execute([$this->writer,$this->title,$oldWriter,$oldTitle]);
+                $qeury->closeCursor();
+        }
 }
 
 
