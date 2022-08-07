@@ -26,7 +26,7 @@ export default class BookCard extends Component{
     GetBookNumber(){
         $.ajax({
             type : "GET",
-            url : "http://localhost/my-projects/my-app/PHP/controle/books handler/GetBookNumHnadler.php",
+            url : "http://localhost/my-projects/library-App/PHP/controle/books handler/GetBookNumHnadler.php",
             data : {"GetNum":"true"},
             dataType : "JSON",
             success : (result)=>{
@@ -61,7 +61,7 @@ export default class BookCard extends Component{
     GetBookInfo(){
         $.ajax({
             type:"GET",
-            url : "http://localhost/my-projects/my-app/PHP/controle/books handler/listLhandler.php",
+            url : "http://localhost/my-projects/library-App/PHP/controle/books handler/listLhandler.php",
             data : {"GetInfo":"true"},
             dataType : "JSON",
             success : (result)=>{

@@ -95,7 +95,7 @@ export default class AddBook extends Component{
             const {book} = this.state;
             $.ajax({
                 type: "POST",
-                url : "http://localhost/my-projects/my-app/PHP/controle/books%20handler/addLhandler.php",
+                url : "http://localhost/my-projects/library-App/PHP/controle/books%20handler/addLhandler.php",
                 data: {"add":"true","writer":book.info.writer,"title":book.info.title,"date":book.info.date},
                 dataType : "JSON",
                 success:(respond)=>{

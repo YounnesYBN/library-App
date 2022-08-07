@@ -95,7 +95,7 @@ export default class AddStudent extends Component{
             const {student} = this.state;
             $.ajax({
                 type: "POST",
-                url : "http://localhost/my-projects/my-app/PHP/controle/students%20handler/addEhandler.php",
+                url : "http://localhost/my-projects/library-App/PHP/controle/students%20handler/addEhandler.php",
                 data: {"add":"true","name":student.info.name,"Fname":student.info.Fname,"class":student.info.class,"adress":student.info.adress},
                 dataType : "JSON",
                 success:(respond)=>{

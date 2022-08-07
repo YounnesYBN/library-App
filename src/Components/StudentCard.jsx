@@ -26,7 +26,7 @@ export default class StudentCard extends Component{
     GetStudentNumber(){
         $.ajax({
             type : "GET",
-            url : "http://localhost/my-projects/my-app/PHP/controle/students handler/GetStudentNumHnadler.php",
+            url : "http://localhost/my-projects/library-App/PHP/controle/students handler/GetStudentNumHnadler.php",
             data : {"GetNum":"true"},
             dataType : "JSON",
             success : (result)=>{
@@ -60,7 +60,7 @@ export default class StudentCard extends Component{
     GetStudentInfo(){
         $.ajax({
             type:"GET",
-            url : "http://localhost/my-projects/my-app/PHP/controle/students handler/listEhandler.php",
+            url : "http://localhost/my-projects/library-App/PHP/controle/students handler/listEhandler.php",
             data : {"GetInfo":"true"},
             dataType : "JSON",
             success : (result)=>{

@@ -82,7 +82,7 @@ class Book{
                 $allStudent = array();
                 $query = $database->query("SELECT * FROM livre;");
                 while($result = $query->fetch()){
-                        $allStudent[] = ["id"=>$result["id"],"title"=>$result["Titre"],"writer"=>$result['auteur'],"date"=>$result['date']];
+                        $allStudent[] = ["id"=>$result["id"],"title"=>$result["Titre"],"writer"=>$result['auteur'],"date"=>$result['date'],"loading"=>false];
                 }
                 $query->closeCursor();
                 return $allStudent;

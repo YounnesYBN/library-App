@@ -99,7 +99,7 @@ class Singin extends Component{
             })
             $.ajax({
                 type : "POST",
-                url : "http://localhost/my-projects/my-app/PHP/controle/registerHandler.php",
+                url : "http://localhost/my-projects/library-App/PHP/controle/registerHandler.php",
                 data : {"email":this.state.email,"username" : this.state.userName ,"password":this.state.password , "singin" : "true"},
                 dataType : "JSON",
                 success : (result)=>{

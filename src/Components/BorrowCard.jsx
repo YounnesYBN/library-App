@@ -27,7 +27,7 @@ export default class BorrowCard extends Component{
     GetBorrowNumber(){
         $.ajax({
             type : "GET",
-            url : "http://localhost/my-projects/my-app/PHP/controle/emprunt handler/GetEmpruntNumHandler.php",
+            url : "http://localhost/my-projects/library-App/PHP/controle/emprunt handler/GetEmpruntNumHandler.php",
             data : {"GetNum":"true"},
             dataType : "JSON",
             success : (result)=>{
@@ -61,7 +61,7 @@ export default class BorrowCard extends Component{
     GetBorrowInfo(){
         $.ajax({
             type:"GET",
-            url : "http://localhost/my-projects/my-app/PHP/controle/emprunt handler/listEmprunt_Handler.php",
+            url : "http://localhost/my-projects/library-App/PHP/controle/emprunt handler/listEmprunt_Handler.php",
             data : {"GetInfo":"true"},
             dataType : "JSON",
             success : (result)=>{

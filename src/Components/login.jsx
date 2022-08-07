@@ -92,7 +92,7 @@ class Login extends Component{
             })
             $.ajax({
                 type : "GET",
-                url : "http://localhost/my-projects/my-app/PHP/controle/loginHandler.php",
+                url : "http://localhost/my-projects/library-App/PHP/controle/loginHandler.php",
                 data : {"username" : this.state.userName ,"password":this.state.password , "login" : "true"},
                 dataType : "JSON",
                 success : (result)=>{

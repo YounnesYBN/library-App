@@ -6,7 +6,7 @@ import {Alert, Typography,IconButton,CircularProgress, Snackbar,Skeleton } from 
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import SchoolIcon from '@mui/icons-material/School';
 import { Close } from "@material-ui/icons";
-import Slepp from './../sleep.png'
+import angry from './../angry.png';
 import databasseErr from "./../databass_error.png"
 
 
@@ -37,7 +37,7 @@ function IfThereNoStudent(){
     return(
         <div id="con-delete-list" style={{width:"80%",height:"70%",backgroundColor:"#D6D2C3",display:"flex",justifyContent:"center",alignItems:"center",borderRadius:"8px 8px 8px 8px",padding:"8px 0px 8px 0px"}}>
                         <div style={{width:"95%",height:"75%",overflow: 'auto',padding:20,backgroundColor:"white",display:"flex",justifyContent:"center",alignItems:"center"}}>
-                            <h1 style={{textAlign:"center",color:"gray",textShadow:"0.5px 0.5px 3px black"}}>There is no students here to <em style={{color:"red"}}>DELETE</em><br /><img src={Slepp} alt="sleep emoji"  width={100} height={100}/> </h1>
+                            <h1 style={{textAlign:"center",color:"gray",textShadow:"0.5px 0.5px 3px black"}}>There is no students here to <em style={{color:"red"}}>DELETE</em><br /><img src={angry} alt="sleep emoji"  width={100} height={100}/> </h1>
                         </div>
         </div>
     )
@@ -62,7 +62,7 @@ export default class DeleteStudent extends Component{
     GetAllStundents(){
         $.ajax({
             type : "GET",
-            url : "http://localhost/my-projects/my-app/PHP/controle/students%20handler/listEhandler.php",
+            url : "http://localhost/my-projects/library-App/PHP/controle/students%20handler/listEhandler.php",
             data : {"GetInfo":"true"},
             dataType :"JSON",
             success : (respond)=>{
@@ -120,7 +120,7 @@ export default class DeleteStudent extends Component{
 
         $.ajax({
             type:"POST",
-            url : "http://localhost/my-projects/my-app/PHP/controle/students%20handler/deleteEhandler.php",
+            url : "http://localhost/my-projects/library-App/PHP/controle/students%20handler/deleteEhandler.php",
             data : {"delete":"true","id":id},
             dataType:"HTML",
             success : ()=>{

@@ -144,7 +144,7 @@ export default class EditeStudent extends Component{
     GetAllStundents(){
         $.ajax({
             type : "GET",
-            url : "http://localhost/my-projects/my-app/PHP/controle/students%20handler/listEhandler.php",
+            url : "http://localhost/my-projects/library-App/PHP/controle/students%20handler/listEhandler.php",
             data : {"GetInfo":"true"},
             dataType :"JSON",
             success : (respond)=>{
@@ -240,7 +240,7 @@ export default class EditeStudent extends Component{
             this.UnActiveBackDrop();
             $.ajax({
                 type: "POST",
-                url : "http://localhost/my-projects/my-app/PHP/controle/students%20handler/editeEhandler.php",
+                url : "http://localhost/my-projects/library-App/PHP/controle/students%20handler/editeEhandler.php",
                 data: {"edite":"true","name":NewStudent.info.name,"Fname":NewStudent.info.Fname,"class":NewStudent.info.class,"adress":NewStudent.info.adress,"oldName":this.state.oldName,"oldFname":this.state.oldFname,id:this.state.editedID},
                 dataType : "JSON",
                 success : (respond)=>{
