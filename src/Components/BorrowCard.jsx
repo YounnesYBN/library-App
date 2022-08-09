@@ -18,7 +18,7 @@ export default class BorrowCard extends Component{
     constructor(props){
         super(props)
         this.state={
-            borrow : {num:{number:0,loding:false,error:false},table:{error:false,loding:false,info:[]}},
+            borrow : {num:{number:0,loding:false,error:false},table:{error:false,loding:false,info:[{id:"",name:"",family_name:"",title:"",writer:"",date:""}]}},
 
         }
         
@@ -75,7 +75,7 @@ export default class BorrowCard extends Component{
                     
                 }else{
                     this.setState({
-                        borrow : {num:this.state.borrow.num,table:{error:true,loding:false,info:[]}}
+                        borrow : {num:this.state.borrow.num,table:{error:true,loding:false,info:[{id:"",name:"",family_name:"",title:"",writer:"",date:""}]}}
                     })
                 }
 
@@ -83,13 +83,13 @@ export default class BorrowCard extends Component{
             },
             error : (result)=>{
                 this.setState({
-                    borrow : {num:this.state.borrow.num,table:{error:true,loding:false,info:[]}}
+                    borrow : {num:this.state.borrow.num,table:{error:true,loding:false,info:[{id:"",name:"",family_name:"",title:"",writer:"",date:""}]}}
                 })
                 
             },
             beforeSend : ()=>{
                 this.setState({
-                    borrow : {num:this.state.borrow.num,table:{error:false,loding:true,info:[]}}
+                    borrow : {num:this.state.borrow.num,table:{error:false,loding:true,info:[{id:"",name:"",family_name:"",title:"",writer:"",date:""}]}}
                 })
             }
             
@@ -99,7 +99,7 @@ export default class BorrowCard extends Component{
     
 
     componentDidMount(){
-        if(this.state.borrow.table.info.length==0){
+        if(this.state.borrow.table.info.length==1){
 
             this.GetBorrowNumber()
             this.GetBorrowInfo()
@@ -168,7 +168,7 @@ export default class BorrowCard extends Component{
 
                 />
                 <Divider ><Chip label="TABLE" variant="filled" color="primary" /></Divider>
-                <CardContent sx={{height:"80%"}}>
+                <CardContent sx={{height:"60%"}}>
                     {borrow.table.loding===true?<Loading />:borrow.table.error===true?<Error />:<DataGrid sx={{height:"100%"}} rows={borrow.table.info}  columns={columns} pageSize={5} rowsPerPageOptions={[5]} autoHeight />}
                 </CardContent>
             </Card>

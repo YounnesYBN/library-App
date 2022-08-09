@@ -31,7 +31,7 @@ export default class BarOfApp extends Component{
     }
 
     render(){
-        const{StudentOption,BackHome,BookOption} = this.props
+        const{StudentOption,BackHome,BookOption,BorrowOption} = this.props
         const shourtCutName =this.props.Name[0]+this.props.Name[1]
         return(
             <Box sx={{ flexGrow: 1 }}>
@@ -70,7 +70,7 @@ export default class BarOfApp extends Component{
                     
 
                 >
-                    <AppMenu StudentOption={StudentOption}  BookOption={BookOption}/>      
+                    <AppMenu StudentOption={StudentOption}  BookOption={BookOption} BorrowOption={BorrowOption}/>      
                 </Drawer>
             </Box>
         )

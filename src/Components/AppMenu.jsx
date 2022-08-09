@@ -32,7 +32,7 @@ export default class AppMenu extends Component{
     }
 
     render(){
-        const{StudentOption,BookOption} = this.props
+        const{StudentOption,BookOption,BorrowOption} = this.props
         const {book,student,borrow} = this.state
         return (
             <Box role="presentation" id="drower-box"style={{width:400,height:"100%"}} >
@@ -83,7 +83,7 @@ export default class AppMenu extends Component{
                 </ListItemButton>
                 <Collapse  id="book-menu"  style={{width:"90%"}} in={borrow.collaps} timeout="auto" >
                     <List style={{width:"100%",margin:"0px 0px 0px 0"}}>
-                            <BorrowMenu />
+                            <BorrowMenu BorrowOption={BorrowOption}/>
                     </List>
                 </Collapse>
 
