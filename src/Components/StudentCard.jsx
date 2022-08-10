@@ -33,7 +33,7 @@ export default class StudentCard extends Component{
                 var Err = result.err
                 if(Err == false){
                     this.setState({
-                        student : {num:{number:this.state.student.num.number+result.number,loding:false,error:false},table:this.state.student.table}
+                        student : {num:{number:result.number,loding:false,error:false},table:this.state.student.table}
                     })
                     console.log("stu done")
                 }else{

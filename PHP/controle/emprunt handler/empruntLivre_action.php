@@ -1,26 +1,24 @@
 <?php
 require "../../module/empruntModule.php";
-if(isset($_GET["add"])){
-        if(empty($_GET["date"])){
-                echo "<h3 style='color:red'>pleas enter all information</h3>";
+
+if(isset($_POST["AddBorrow"])){
+        $name = $_POST["name"];
+        $Fname = $_POST["Fname"];
+        $title = $_POST["title"];
+        $writer = $_POST["writer"];
+        $date = $_POST["date"];
+
+        $emprunt = new Emprunt($name,$Fname,$title,$writer,$date);
+        $database = $emprunt->Connect();
+        $isExist = $emprunt->IsEmpruntExist($database);
+        if($isExist==true){
+                echo json_encode(["userErr"=>true]);
         }else{
-                $idbook = $_GET["bookID"];
-                $idstudent = $_GET["studentID"];
-                $date = $_GET["date"];
-                $emprunt = new Emprunt($idbook,$idstudent,$date);
-                $database = $emprunt->Connect();
-                if($database != false){
-                        $isExist = $emprunt->IsempruntExist($database);
-                        if($isExist==false){
-                                $emprunt->AddEmprunt($database);
-                                echo "<h3 style='color:green'>the emprunt is added</h3>";
-                        }else{
-                                echo "<h3 style='color:red'>this Emprunt is already exist</h3>";
-                        }
-                }else{
-                        echo "<h3 style='color:red'>somthing went wrong</h3>";
-                }
+                $emprunt->AddEmprunt($database);
+                echo json_encode(["userErr"=>false]);
+                
         }
+        
 }
 
 ?>

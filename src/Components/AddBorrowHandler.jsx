@@ -4,14 +4,19 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Button,Select,FormControl,MenuItem,InputLabel, TextField ,FormHelperText} from "@material-ui/core";
 import { Alert } from "@mui/material";
 import CircularProgress from '@mui/material/CircularProgress';
+import PersonPinIcon from '@mui/icons-material/PersonPin';
+import BookIcon from '@mui/icons-material/Book';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import $ from "jquery";
+import LibraryAddOutlinedIcon from '@mui/icons-material/LibraryAddOutlined';
+import CleaningServicesTwoToneIcon from '@mui/icons-material/CleaningServicesTwoTone';
+
 
 
 function Loading(){
-
-    <div id="center-ele" style={{width:"100%",height:"100%"}}>
-        <CircularProgress size={50} />
-    </div>
+    
+    return <div id="center-ele" style={{width:"100%",height:"100%"}}><CircularProgress size={50} color="error" /></div>
+    
 }
 
 
@@ -23,8 +28,8 @@ export default class AddBorrowHandler extends Component{
             loading:false,
             value : {name:"",Fname:"",title:"",writer:"",date:""},
             err : {students:null,book:null,date:null},
-            SelectStudentValue : "",
-            SelectBookValue : "",
+            SelectStudentValue : null,
+            SelectBookValue : null,
             AllStudent : [],
             AllBook : [],
             
@@ -40,7 +45,7 @@ export default class AddBorrowHandler extends Component{
                 data:{"GetInfo":"true"},
                 dataType:"JSON",
                 success : (respond)=>{
-                    console.log(respond)
+                    
                     var sqlErr = respond.err
                     var lenArray = this.state.AllStudent.length
                     
@@ -67,7 +72,7 @@ export default class AddBorrowHandler extends Component{
                 data : {"GetInfo":"true"},
                 dataType :"JSON",
                 success : (respond)=>{
-                    console.log(respond)
+                    
                     var sqlErr = respond.err
                     var lenArray = this.state.AllBook.length
                     
@@ -124,9 +129,74 @@ export default class AddBorrowHandler extends Component{
             err : {students:err.students,book:err.book,date:testLen==true?false:true},
         })
         
-
+        
     }
 
+    clean(){
+
+        this.setState({
+            value : {name:"",Fname:"",title:"",writer:"",date:""},
+            err : {students:null,book:null,date:null},
+            SelectStudentValue : "",
+            SelectBookValue : "",
+        })
+    }
+
+    addBorrow(){
+        const {closeBD,openSB,SetTypeErr,SetTypeSuc} = this.props
+        const {err} = this.state
+        const studentErr = err.students
+        const bookErr = err.book
+        const dateErr = err.date
+
+        if(studentErr==false&&bookErr==false&&dateErr==false){
+            
+            const {value} = this.state
+
+            $.ajax({
+                type:"POST",
+                url:"http://localhost/my-projects/library-App/PHP/controle/emprunt%20handler/empruntLivre_action.php",
+                data : {"AddBorrow":"true","name":value.name,"Fname":value.Fname,"title":value.title,"writer":value.writer,"date":value.date},
+                dataType:"JSON",
+                success:(respond)=>{
+                    
+                    if(respond.userErr==true){
+                        this.clean();
+                        closeBD();
+                        this.setState({
+                            loading : false
+                        })
+                        openSB()
+                        SetTypeErr()
+                    }else{
+                        this.clean();
+                        closeBD();
+                        this.setState({
+                            loading : false
+                        })
+                        openSB()
+                        SetTypeSuc()
+                        setTimeout(()=>{window.location.reload()},3000)
+                    }
+                },
+                
+                beforeSend : ()=>{
+                    this.setState({
+                        loading : true
+                    })
+                }
+        })
+
+
+        }else{
+            this.setState({
+
+                err : {students:studentErr==false?false:true,book:bookErr==false?false:true,date:dateErr==false?false:true}
+
+            })
+        }
+
+    }
     
         
         
@@ -136,7 +206,7 @@ export default class AddBorrowHandler extends Component{
     }
 
     render(){
-        const {closeBD} = this.props
+        const {closeBD,openSB,SetMessage} = this.props
         const {err} = this.state
         return(
             <div style={{marginTop:100,width:"70%",height:400,borderRadius:5,backgroundColor:"white"}}>
@@ -179,14 +249,15 @@ export default class AddBorrowHandler extends Component{
                                         key = {id}
                                         value = {index}
                                         >
-                                        
+                                        <PersonPinIcon fontSize="small" color="info" style={{marginRight:4}} /> 
+
                                         {name+" "+Fname}
                                         </MenuItem>
                                     )
                                 })
                                 }
                             </Select>
-                            <FormHelperText >{err.students==false?<Alert severity="success" >Good</Alert>:err.students==true?<Alert severity="error" >you need to select</Alert>:""}</FormHelperText>
+                            <FormHelperText >{err.students==false?<Alert style={{textAlign:"center"}} severity="success" >Good</Alert>:err.students==true?<Alert severity="error" >you need to select</Alert>:""}</FormHelperText>
                             
                         </FormControl>
                     </div>
@@ -216,15 +287,19 @@ export default class AddBorrowHandler extends Component{
                                             key = {id}
                                             value = {index}
                                             >
-                                            
-                                            {title+" "+writer}
+                                            <BookIcon fontSize="small" color="info" style={{marginRight:4}} /> 
+
+                                            {title}
+                                            <PersonOutlineIcon fontSize="small" color="info" style={{margin:"0px 10px 0px 4px"}}/> 
+
+                                             {writer}
                                             </MenuItem>
                                         )
                                     })
                                 }
                                 
                             </Select>
-                            <FormHelperText >{err.book==false?<Alert severity="success" >Good</Alert>:err.book==true?<Alert severity="error" >you need to select</Alert>:""}</FormHelperText>
+                            <FormHelperText >{err.book==false?<Alert severity="success" style={{textAlign:"center"}} >Good</Alert>:err.book==true?<Alert severity="error" >you need to select</Alert>:""}</FormHelperText>
                         </FormControl>
 
                     </div>
@@ -238,16 +313,16 @@ export default class AddBorrowHandler extends Component{
                           type="date"
                           error={err.date}
                           onChange={this.OnChangeDate.bind(this)}
-                          helperText={err.date==false?<Alert severity="success" >Good</Alert>:err.date==true?<Alert severity="error" >enter a date pleas</Alert>:""}
+                          helperText={err.date==false?<Alert severity="success" style={{textAlign:"center"}} >Good</Alert>:err.date==true?<Alert severity="error" >enter a date pleas</Alert>:""}
                         />
                     </div>
 
                     <div style={{width:"100%",display:"flex",justifyContent:"center",alignItems:"center",gap:20}}>
-                        <Button variant="contained"  color="primary">
-                            add
+                        <Button variant="contained"  color="primary" onClick={this.addBorrow.bind(this)}>
+                            <LibraryAddOutlinedIcon fontSize="large"  />
                         </Button>
-                        <Button variant="outlined" color="secondary">
-                            clean
+                        <Button onClick={this.clean.bind(this)} variant="outlined" color="secondary">
+                            <CleaningServicesTwoToneIcon  color="secondary" fontSize="large"/>
                         </Button>
                     </div>
                     

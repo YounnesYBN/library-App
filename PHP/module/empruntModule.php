@@ -37,6 +37,16 @@ class Emprunt{
                 $qury->execute(array($this->name,$this->Fname,$this->title,$this->writer,$this->date));
                 $qury->closeCursor();
         }
+
+        public function IsEmpruntExist($database){
+                $qury =$database->prepare("SELECT * FROM emprunts WHERE name=? AND Fname=? AND title=? AND writer=? ;");
+                $qury->execute(array($this->name,$this->Fname,$this->title,$this->writer));
+                if($qury->fetch()){
+                        return true;
+                }else{
+                        return false;
+                }
+        }
         
 
         public function GetAllEmprunt($database){
