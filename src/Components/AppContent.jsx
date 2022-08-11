@@ -7,7 +7,7 @@ import EditeStudent from "./EditeStudent";
 import AddBook from "./AddBook"; 
 import EditeBook from "./EditeBook";
 import DeleteBook from "./DeleteBook";
-import AddBorrow from "./AddBorrow";
+import BorrowOption from "./BorrowOption";
 
 
 export default class AppContent extends Component{
@@ -81,7 +81,7 @@ export default class AppContent extends Component{
     }
 
     render(){
-       const directionArray = {home:<FirstContent key={"home"} />,AddS:<AddStudent key={"addStudent"} />,DeleteS:<DeleteStudent key={"deleteStudent"} />,EditeS:<EditeStudent key={"editeStudent"}/>,AddB : <AddBook key={"addBook"}/> ,DeleteB:<DeleteBook  key={"deleteBook"}/>,EditeB:<EditeBook  key={"editeBook"}/>,AddBor:<AddBorrow />}
+       const directionArray = {home:<FirstContent key={"home"} />,AddS:<AddStudent key={"addStudent"} />,DeleteS:<DeleteStudent key={"deleteStudent"} />,EditeS:<EditeStudent key={"editeStudent"}/>,AddB : <AddBook key={"addBook"}/> ,DeleteB:<DeleteBook  key={"deleteBook"}/>,EditeB:<EditeBook  key={"editeBook"}/>,AddBor:<BorrowOption />}
         return( 
             <div id="app">
                 <BarOfApp key={"barOfApp"} StudentOption={{add:this.AddStudentHandler.bind(this),delete:this.DeleteStudentHandler.bind(this),edite:this.EditeStudentHandler.bind(this)}} BackHome={this.Home.bind(this)} Name={this.props.Name} LogOutHandler={this.props.logOut}  BookOption={{add:this.AddBookHandler.bind(this),edite:this.EditeBookHandler.bind(this),delete:this.DeleteBookHandler.bind(this)} } BorrowOption={{add:this.AddBorrowHandler.bind(this)}} />

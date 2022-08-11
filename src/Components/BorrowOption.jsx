@@ -8,13 +8,15 @@ import Tooltip from '@mui/material/Tooltip';
 import { Backdrop, Snackbar, IconButton, Alert } from "@mui/material";
 import AddBorrowHandler from "./AddBorrowHandler";
 import { Close } from '@mui/icons-material'
+import DeleteBorrow from "./DeleteBorrowHandler"
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
 
 
 
 
 
 
-export default class AddBorrow extends Component{
+export default class BorrowOption extends Component{
 
     constructor(props){
         
@@ -23,15 +25,24 @@ export default class AddBorrow extends Component{
         this.state={
             addBD : false,
             deleteBD:false,
-            SnakeBar:{open:false,type:""}
+            SnakeBar:{open:false,type:""},
+            
         }
 
     }
 
-    colosAddBD(){
-        console.log("close")
+    
+
+    closeAddBD(){
+        
         this.setState({
             addBD:false
+        })
+    }
+    closeDeleteBD(){
+        
+        this.setState({
+            deleteBD:false
         })
     }
 
@@ -56,6 +67,7 @@ export default class AddBorrow extends Component{
         })
         
     }
+    
 
 
     render(){
@@ -74,15 +86,26 @@ export default class AddBorrow extends Component{
                     </Tooltip>
 {/* //////////////////////////////////////////////////delete////////////////////////////////// */}
                     <Tooltip  placement="bottom" title={<p  style={{textAlign:"center"}}>delete a borrow by selecting wish <em color="green">borrow</em> you want</p> } arrow>
-                        <Button variant="outlined" color="error" style={{width:200,gap:20,height:50}}>
+                        <Button onClick={()=>{this.setState({deleteBD:true})}} variant="outlined" color="error" style={{width:200,gap:20,height:50}}>
                             <Typography variant="h6" color="lightred">REMOVE</Typography>  <DeleteForeverIcon fontSize="large" color="error" /> 
                         </Button>
                     </Tooltip>
+{/* /////////////////////////////////////////////////////////////save////////////////////////////////////////////// */}
+                    <Tooltip  placement="bottom" title={<p  style={{textAlign:"center"}}>Save the changes so the tabel will be <em color="green">updated</em></p> } arrow>
+                        <Button onClick={()=>{window.location.reload()}} variant="outlined" color="success" style={{width:200,gap:20,height:50}}>
+                            <Typography variant="h6" color="lightred">Save</Typography>  <SaveAltIcon fontSize="large" color="success" /> 
+                        </Button>
+                    </Tooltip>
                 </div>
-
+{/* ///////////////////////////////////////////////////////FOR add////////////////////////////////////////////////////////////// */}
                 <Backdrop invisible={false} style={{zIndex:1}} open={this.state.addBD} onClick={()=>{this.setState({addBD:true})}}>
-                        <AddBorrowHandler closeBD={this.colosAddBD.bind(this)} openSB={this.OpenSnakeBare.bind(this)} SetTypeErr={this.SetSnakeBareTypeToErr.bind(this)} SetTypeSuc={this.SetSnakeBareTypeToSuc.bind(this)}  />
+                        <AddBorrowHandler closeBD={this.closeAddBD.bind(this)} openSB={this.OpenSnakeBare.bind(this)} SetTypeErr={this.SetSnakeBareTypeToErr.bind(this)} SetTypeSuc={this.SetSnakeBareTypeToSuc.bind(this)}  />
                 </Backdrop>
+{/* ///////////////////////////////////////////////////////FOR delete////////////////////////////////////////////////////////////// */}
+                <Backdrop invisible={false} style={{zIndex:1}} open={this.state.deleteBD} onClick={()=>{this.setState({deleteBD:true})}}>
+                        <DeleteBorrow closeBD={this.closeDeleteBD.bind(this)}  />
+                </Backdrop>
+
 
 
                 <Snackbar

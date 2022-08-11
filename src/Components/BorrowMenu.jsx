@@ -1,6 +1,6 @@
 import { Component } from "react"
 import { ListItemButton,ListItemIcon } from "@mui/material";
-import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
+import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 
 
 
@@ -16,9 +16,9 @@ export default class BorrowMenu extends Component{
         return(
             <div>
                 <ListItemButton  onClick={()=>{BorrowOption.add()}} sx={{gap:6,display:"flex",justifyContent:"center",height:"fit-content"}}>
-                    <h4 style={{color:"white",textShadow:"1px 1px 3px gray"}}>Add Order</h4>
+                    <h4 style={{color:"white",textShadow:"1px 1px 3px gray"}}>Order managment</h4>
                     <ListItemIcon>
-                        <AddToPhotosIcon fontSize="large" color="secondary" />
+                        <SettingsRoundedIcon fontSize="large" color="secondary" />
                     </ListItemIcon>
                 </ListItemButton >
             </div>

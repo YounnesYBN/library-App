@@ -77,7 +77,7 @@ export default class AppMenu extends Component{
                     <ListItemIcon>
                         <LocalLibraryIcon fontSize="large" color="primary" />
                     </ListItemIcon>
-                    <ListItemText primary={<Typography id="butt-menu-text" style={{textShadow:"1px 1px 2.5px gray",color:""}} variant="h5">Borrow Options</Typography>} />
+                    <ListItemText primary={<Typography id="butt-menu-text" style={{textShadow:"1px 1px 2.5px gray",color:""}} variant="h5">Borrow</Typography>} />
                     {borrow.collaps===false?<ExpandLess />:<ExpandMore />}
 
                 </ListItemButton>

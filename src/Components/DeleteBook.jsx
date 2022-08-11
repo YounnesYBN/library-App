@@ -153,7 +153,7 @@ export default class DeleteBook extends Component{
                 :AllBook.data.length==0? <IfThereNoBooks />:
                 (
                     <div id="con-delete-list" style={{width:"80%",height:"70%",backgroundColor:"#D6D2C3",display:"flex",justifyContent:"center",alignItems:"center",borderRadius:"8px 8px 8px 8px",padding:"8px 0px 8px 0px"}}>
-                        <div style={{width:"95%",height:"75%",overflow: 'auto',padding:20,backgroundColor:"white",display:AllBook.data.length==0?"flex":"",justifyContent:AllBook.data.length==0?"center":"",alignItems:AllBook.data.length==0?"center":""}}>
+                        <div style={{width:"95%",height:"75%",overflow: 'auto',padding:20,backgroundColor:"white",display:"",justifyContent:"",alignItems:""}}>
 
                                 
                                 <List  sx={{

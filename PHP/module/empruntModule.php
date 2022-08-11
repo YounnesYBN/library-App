@@ -53,7 +53,7 @@ class Emprunt{
                 $array = [];
                 $qeury  = $database->query("SELECT * FROM emprunts;");
                 while($result=$qeury->fetch()){
-                        $array[] = ["id"=>$result["id"],"name"=>$result["name"],"family_name"=>$result["Fname"],"title"=>$result["title"],"writer"=>$result["writer"],"date"=>$result["date"]];
+                        $array[] = ["id"=>$result["id"],"name"=>$result["name"],"family_name"=>$result["Fname"],"title"=>$result["title"],"writer"=>$result["writer"],"date"=>$result["date"],"loading"=>false];
                 }
                 return $array;
         }
@@ -91,6 +91,12 @@ class Emprunt{
 
                 $qeury = $database->prepare("UPDATE emprunts SET writer=?,title=? WHERE writer=? and title=?");
                 $qeury->execute([$this->writer,$this->title,$oldWriter,$oldTitle]);
+                $qeury->closeCursor();
+        }
+
+        public function DeleteEmprunt($database,$id){
+                $qeury = $database->prepare("DELETE FROM emprunts WHERE id=?");
+                $qeury->execute([$id]);
                 $qeury->closeCursor();
         }
 }

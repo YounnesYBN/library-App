@@ -176,7 +176,7 @@ export default class AddBorrowHandler extends Component{
                         })
                         openSB()
                         SetTypeSuc()
-                        setTimeout(()=>{window.location.reload()},3000)
+                        
                     }
                 },
                 
