@@ -24,7 +24,7 @@ function Loading(){
 function IfThereNoBorrow(){
 
     return(
-        <div  style={{width:"100%",height:"100%",backgroundColor:"#D6D2C3",display:"flex",justifyContent:"center",alignItems:"center",borderRadius:"8px 8px 8px 8px",padding:"0"}}>
+        <div  style={{width:"100%",height:"100%",backgroundColor:"whitesmoke",display:"flex",justifyContent:"center",alignItems:"center",borderRadius:"8px 8px 8px 8px",padding:"0"}}>
                         
             <h1 style={{textAlign:"center",color:"gray",textShadow:"0.5px 0.5px 3px black"}}>There is no Orders here to <em style={{color:"red"}}>DELETE</em><br /><img src={angry} alt="sleep emoji"  width={100} height={100}/> </h1>
                         

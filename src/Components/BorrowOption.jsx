@@ -10,6 +10,7 @@ import AddBorrowHandler from "./AddBorrowHandler";
 import { Close } from '@mui/icons-material'
 import DeleteBorrow from "./DeleteBorrowHandler"
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import $ from "jquery";
 
 
 
@@ -26,12 +27,32 @@ export default class BorrowOption extends Component{
             addBD : false,
             deleteBD:false,
             SnakeBar:{open:false,type:""},
+            disable :false,
+            
             
         }
 
     }
 
-    
+    ConnectToDB(){
+        $.ajax({
+            type : "GET",
+            url : "http://localhost/my-projects/library-App/PHP/controle/emprunt%20handler/connectHandler.php",
+            data : {"check":"true"},
+            dataType : "JSON",
+            success:(respond)=>{
+                var connect = respond.connect;
+                this.setState({
+                    disable : connect==false?true:false
+                })
+            },
+            error : ()=>{
+                this.setState({
+                    disable : true,
+                })
+            }
+        })
+    }
 
     closeAddBD(){
         
@@ -68,7 +89,9 @@ export default class BorrowOption extends Component{
         
     }
     
-
+    componentDidMount(){
+        this.ConnectToDB()
+    }
 
     render(){
         return(
@@ -79,16 +102,20 @@ export default class BorrowOption extends Component{
                 <div style={{width:"50%",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center", gap:30}}>
 {/* //////////////////////////////////////////////////add////////////////////////////////// */}
                     
-                    <Tooltip placement="top" title={<p  style={{textAlign:"center"}}>Add a borrow by selecting the <em color="blue"> student</em> and the <em color="blue">name</em> of the book <br /> and also provide the date</p> } arrow>
-                        <Button onClick={()=>{this.setState({addBD:true})}} variant="contained" color="primary" style={{width:200,gap:20,height:50}}>
-                             <Typography variant="h6"  >ADD</Typography> <AddIcon fontSize="large"  /> 
-                        </Button>
+                    <Tooltip placement="top"  title={this.state.disable==false?<p  style={{textAlign:"center"}}>Add a borrow by selecting the <em color="blue"> student</em> and the <em color="blue">name</em> of the book <br /> and also provide the date</p>:<p style={{textAlign:"center"}}> the button is <em color="red"> disabled</em> because somthing went wrong</p> } arrow>
+                        <span>
+                            <Button disabled={this.state.disable} onClick={()=>{this.setState({addBD:true})}} variant="contained" color="primary" style={{width:200,gap:20,height:50}}>
+                                 <Typography variant="h6"  >ADD</Typography> <AddIcon fontSize="large"  /> 
+                            </Button>
+                        </span>
                     </Tooltip>
 {/* //////////////////////////////////////////////////delete////////////////////////////////// */}
-                    <Tooltip  placement="bottom" title={<p  style={{textAlign:"center"}}>delete a borrow by selecting wish <em color="green">borrow</em> you want</p> } arrow>
-                        <Button onClick={()=>{this.setState({deleteBD:true})}} variant="outlined" color="error" style={{width:200,gap:20,height:50}}>
-                            <Typography variant="h6" color="lightred">REMOVE</Typography>  <DeleteForeverIcon fontSize="large" color="error" /> 
-                        </Button>
+                    <Tooltip  placement="bottom" title={this.state.disable==false?<p  style={{textAlign:"center"}}>delete a borrow by selecting wish <em color="green">borrow</em> you want</p>:<p style={{textAlign:"center"}}> the button is <em color="red"> disabled</em> because somthing went wrong</p>  } arrow>
+                        <span>                        
+                            <Button disabled={this.state.disable} onClick={()=>{this.setState({deleteBD:true})}} variant="outlined" color="error" style={{width:200,gap:20,height:50}}>
+                                <Typography variant="h6" color="lightred">REMOVE</Typography>  <DeleteForeverIcon fontSize="large" color="error" /> 
+                            </Button>
+                        </span>
                     </Tooltip>
 {/* /////////////////////////////////////////////////////////////save////////////////////////////////////////////// */}
                     <Tooltip  placement="bottom" title={<p  style={{textAlign:"center"}}>Save the changes so the tabel will be <em color="green">updated</em></p> } arrow>
